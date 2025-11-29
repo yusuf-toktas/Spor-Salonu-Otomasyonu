@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Welcome, {{ user.username }}</h2>
+        <p>Email: {{ user.email }}</p>
+
+        <div class="card mt-4">
+            <div class="card-header">Your Subscription</div>
+            <div class="card-body">
+                {% if subscription and subscription.is_active %}
+                    <h5 class="card-title">{{ subscription.plan.name }}</h5>
+                    <p class="card-text">Valid until: {{ subscription.end_date }}</p>
+                    <span class="badge bg-success">Active</span>
+                {% else %}
+                    <p class="card-text">You do not have an active subscription.</p>
+                    <a href="{% url 'plans' %}" class="btn btn-primary">View Plans</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        {% if qr_code %}
+            <div class="card">
+                <div class="card-header">Access Pass</div>
+                <div class="card-body text-center">
+                    <img src="data:image/png;base64,{{ qr_code }}" alt="Access QR Code" class="img-fluid">
+                    <p class="mt-2 text-muted">Scan at entrance</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

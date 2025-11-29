@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Gym Platform</h1>
+    <p class="lead">Your journey to fitness starts here.</p>
+    <hr class="my-4">
+    <p>Join us today and get access to top-notch facilities and trainers.</p>
+    {% if not user.is_authenticated %}
+        <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Sign Up Now</a>
+    {% endif %}
+</div>
+{% endblock %}
