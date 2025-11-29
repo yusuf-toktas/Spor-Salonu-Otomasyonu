@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="list-group">
+            <li class="list-group-item active">Users</li>
+            {% for u in users %}
+                <a href="{% url 'chat' u.id %}" class="list-group-item list-group-item-action">{{ u.username }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h3>Recent Messages</h3>
+        <ul class="list-group">
+            {% for msg in messages %}
+                <li class="list-group-item">
+                    <strong>{{ msg.sender.username }}</strong> to <strong>{{ msg.receiver.username }}</strong>:
+                    {{ msg.content|truncatechars:50 }}
+                    <small class="text-muted float-end">{{ msg.timestamp|date:"M d, H:i" }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
